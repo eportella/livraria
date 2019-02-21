@@ -1,8 +1,8 @@
 ﻿namespace Livraria.EntityFramework.DbContext
 {
-    public static class Service
+    internal static class Service
     {
-        public static Interface MemoryNew()
+        internal static Model MemoryNew()
         {
             return new Model(Options.Service.NewInMemory());
         }
