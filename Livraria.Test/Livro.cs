@@ -26,17 +26,17 @@ namespace Livraria.Test
 
             Livraria.Livro.Service.Update(livro);
 
-            Assert.IsTrue(Livraria.Livro.Service.Read(f => f.Where(Livraria.Livro.Expression.ISBNHas(livro)).Where(w=>w.Preco == 20.00M)).Any(), "Update");
+            Assert.IsTrue(Livraria.Livro.Service.Read(f => f.Where(Livraria.Livro.Expression.ISBNHas(livro)).Where(w => w.Preco == 20.00M)).Any(), "Update");
 
             Livraria.Livro.Service.Delete(livro);
 
             Assert.IsFalse(Livraria.Livro.Service.Read(f => f.Where(Livraria.Livro.Expression.ISBNHas(livro))).Any(), "Delete");
         }
 
-        [TestMethod,ExpectedException(typeof(Exception.Model))]
-        public void RestricaoCadastroDoisLivrosComMesmoISBN()
+        [TestMethod]
+        public void RestricaoCadastroDoisLivrosComMesmoISBNAtualizacaoInexistenteExclusaoInexistente()
         {
-            Livraria.Livro.Service.Create(new Livraria.Livro.Model
+            var livro = new Livraria.Livro.Model
             {
                 Nome = "Memórias Póstumas de Brás Cubas",
                 ISBN = "9788538076902",
@@ -44,17 +44,15 @@ namespace Livraria.Test
                 CapaImagemConteudo = new byte[] { },
                 Preco = 16.52M,
                 PublicacaoData = new System.DateTime(1882, 01, 01)
-            }).Wait();
+            };
 
-            Livraria.Livro.Service.Create(new Livraria.Livro.Model
-            {
-                Nome = "Memórias Póstumas de Brás Cubas",
-                ISBN = "9788538076902",
-                Autor = "Machado de Assis",
-                CapaImagemConteudo = new byte[] { },
-                Preco = 16.52M,
-                PublicacaoData = new System.DateTime(1882, 01, 01)
-            });
+            Assert.ThrowsExceptionAsync<Exception.Model>(() => Livraria.Livro.Service.Update(livro)).Wait();
+
+            Livraria.WebApi.Controllers.Livro.Post.Service.Call(livro).Wait();
+            Assert.ThrowsExceptionAsync<Exception.Model>(() => Livraria.Livro.Service.Create(livro)).Wait();
+
+            Livraria.WebApi.Controllers.Livro.Delete.Service.Call(livro).Wait();
+            Assert.ThrowsExceptionAsync<Exception.Model>(() => Livraria.Livro.Service.Delete(livro)).Wait();
         }
     }
 }

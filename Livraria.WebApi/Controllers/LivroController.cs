@@ -9,19 +9,19 @@ namespace Livraria.WebApi.Controllers
     public class LivroController : ControllerBase
     {
         [HttpGet]
-        public async Task<IEnumerable<Livraria.Livro.Interface>> Get([FromQuery] Livro.Get.Model model) =>
-            await Task.Run(() => Livraria.Livro.Service.Read());
+        public async Task<Envelope.Model<IEnumerable<Livraria.Livro.Interface>>> Get([FromQuery] Livro.Get.Model model) =>
+            await Livro.Get.Service.Call(model);
 
         [HttpPost]
-        public async Task Post([FromBody]Livraria.Livro.Model model) =>
-            await Livraria.Livro.Service.Create(model);
+        public async Task<Envelope.Model> Post([FromBody]Livraria.Livro.Model model) =>
+            await Livro.Post.Service.Call(model);
 
         [HttpPut]
-        public async Task Put([FromBody] Livraria.Livro.Model model) =>
-            await Livraria.Livro.Service.Update(model);
+        public async Task<Envelope.Model> Put([FromBody]Livraria.Livro.Model model) =>
+            await Livro.Put.Service.Call(model);
 
         [HttpDelete]
-        public async Task Delete([FromBody] Livraria.Livro.Model model) =>
-            await Livraria.Livro.Service.Delete(model);
+        public async Task<Envelope.Model> Delete([FromBody]Livraria.Livro.Model model) =>
+            await Livro.Delete.Service.Call(model);
     }
 }

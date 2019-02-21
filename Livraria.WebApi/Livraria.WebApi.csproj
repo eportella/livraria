@@ -5,9 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Livro\Delete\" />
-    <Folder Include="Controllers\Livro\Put\" />
-    <Folder Include="Controllers\Livro\Post\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

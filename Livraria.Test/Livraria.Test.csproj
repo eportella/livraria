@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Livraria.WebApi\Livraria.WebApi.csproj" />
     <ProjectReference Include="..\Livraria\Livraria.csproj" />
   </ItemGroup>
 
