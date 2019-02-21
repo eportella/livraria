@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
-namespace Livraria.Test.WebApi
+namespace Livraria.Test.WebApi.Livro
 {
     [TestClass]
-    public class Livro
+    public class Service
     {
         [TestMethod]
         public void CRUD()

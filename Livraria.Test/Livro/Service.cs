@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Livraria.Test
+namespace Livraria.Test.Livro
 {
     [TestClass]
-    public class Livro
+    public class Service
     {
         [TestMethod]
         public void CRUD()
