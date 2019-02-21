@@ -6,7 +6,7 @@ namespace Livraria.Test.WebApi
     [TestClass]
     public class Livro
     {
-        [TestMethod, ExpectedException(typeof(Exception.Model))]
+        [TestMethod]
         public void CRUD()
         {
             var livro = new Livraria.Livro.Model
