@@ -34,7 +34,7 @@ namespace Livraria.Test.WebApi.Livro
             Assert.IsTrue(Livraria.WebApi.Controllers.Livro.Get.Service.Call(new Livraria.WebApi.Controllers.Livro.Get.Model()).Result.resultado.SingleOrDefault() == null, "Delete");
         }
 
-        [TestMethod, ExpectedException(typeof(Exception.Model))]
+        [TestMethod]
         public void RestricaoCadastroDoisLivrosComMesmoISBNAtualizacaoInexistenteExclusaoInexistente()
         {
             var livro = new Livraria.Livro.Model
