@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="microsoft.EntityFrameworkCore" Version="2.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.2" />
+  </ItemGroup>
+
 </Project>
