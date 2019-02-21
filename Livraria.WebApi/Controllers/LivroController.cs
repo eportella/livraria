@@ -22,6 +22,6 @@ namespace Livraria.WebApi.Controllers
 
         [HttpDelete]
         public async Task Delete([FromBody] Livraria.Livro.Model model) =>
-            await Livraria.Livro.Service.Update(model);
+            await Livraria.Livro.Service.Delete(model);
     }
 }
