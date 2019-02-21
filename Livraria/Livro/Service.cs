@@ -7,14 +7,14 @@
 
     public static class Service
     {
-        public static Task Create(Interface @interface)
+        public static Task Create(Interface livro)
         {
             using (var db = EntityFramework.DbContext.Service.MemoryNew())
             {
-                if (db.Livro.Any(Expression.ISBNHas(@interface)))
-                    throw new Livraria.Exception.Model($"{nameof(@interface.ISBN)} ({@interface.ISBN}) já cadastrado");
+                if (db.Livro.Any(Expression.ISBNHas(livro)))
+                    throw new Livraria.Exception.Model($"{nameof(livro.ISBN)} ({livro.ISBN}) já cadastrado");
 
-                db.Livro.Add(EntityFramework.Livro.Service.Convert(@interface));
+                db.Livro.Add(EntityFramework.Livro.Service.Convert(livro));
                 return db.SaveChangesAsync();
             }
         }
@@ -36,35 +36,35 @@
             }
         }
 
-        public static Task Update(Interface @interface)
+        public static Task Update(Interface livro)
         {
             using (var db = EntityFramework.DbContext.Service.MemoryNew())
             {
-                var livro = db.Livro.SingleOrDefault(Expression.ISBNHas(@interface));
+                var entity = db.Livro.SingleOrDefault(Expression.ISBNHas(livro));
 
-                if (livro == null)
-                    throw new Livraria.Exception.Model($"{nameof(@interface.ISBN)} ({@interface.ISBN}) não encontrado");
+                if (entity == null)
+                    throw new Livraria.Exception.Model($"{nameof(livro.ISBN)} ({livro.ISBN}) não encontrado");
 
-                livro.Nome = @interface.Nome;
-                livro.Preco = @interface.Preco;
-                livro.PublicacaoData = @interface.PublicacaoData;
-                livro.Autor = @interface.Autor;
-                livro.CapaImagemConteudo = @interface.CapaImagemConteudo;
+                entity.Nome = livro.Nome;
+                entity.Preco = livro.Preco;
+                entity.PublicacaoData = livro.PublicacaoData;
+                entity.Autor = livro.Autor;
+                entity.CapaImagemConteudo = livro.CapaImagemConteudo;
 
-                db.Livro.Update(livro);
+                db.Livro.Update(entity);
 
                 return db.SaveChangesAsync();
             }
         }
 
-        public static Task Delete(Interface @interface)
+        public static Task Delete(Interface livro)
         {
             using (var db = EntityFramework.DbContext.Service.MemoryNew())
             {
-                var entity = db.Livro.SingleOrDefault(Expression.ISBNHas(@interface));
+                var entity = db.Livro.SingleOrDefault(Expression.ISBNHas(livro));
 
                 if (entity == null)
-                    throw new Livraria.Exception.Model($"{nameof(@interface.ISBN)} ({@interface.ISBN}) não encontrado");
+                    throw new Livraria.Exception.Model($"{nameof(livro.ISBN)} ({livro.ISBN}) não encontrado");
 
                 db.Livro.Remove(entity);
                 return db.SaveChangesAsync();
