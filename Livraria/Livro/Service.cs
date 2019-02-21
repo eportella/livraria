@@ -19,7 +19,7 @@
             }
         }
 
-        public static IEnumerable<EntityFramework.Livro.Model> Read(Func<IQueryable<EntityFramework.Livro.Model>, IQueryable<EntityFramework.Livro.Model>> function = null)
+        public static IEnumerable<Livro.Interface> Read(Func<IQueryable<EntityFramework.Livro.Model>, IQueryable<EntityFramework.Livro.Model>> function = null)
         {
             using (var db = EntityFramework.DbContext.Service.MemoryNew())
             {
