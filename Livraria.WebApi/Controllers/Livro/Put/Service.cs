@@ -8,7 +8,7 @@
         {
             try
             {
-                await Livraria.Livro.Service.Update(livro);
+                await Livraria.Livro.Update.Service.Call(livro);
 
                 return new Envelope.Model();
             }

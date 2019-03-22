@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,19 +19,19 @@ namespace Livraria.Test.Livro
                 Preco = 16.52M,
                 PublicacaoData = new System.DateTime(1882, 01, 01)
             };
-            Livraria.Livro.Service.Create(livro).Wait();
+            Livraria.Livro.Create.Service.Call(livro).Wait();
 
-            Assert.IsTrue(Livraria.Livro.Service.Read(f => f.Where(Livraria.Livro.Expression.ISBNHas(livro))).Any(), "Created & Read");
+            Assert.IsTrue(Livraria.Livro.Read.Service.Call(f => f.Where(Livraria.Livro.Expression.ISBNHas(livro))).Any(), "Created & Read");
 
             livro.Preco = 20.00M;
 
-            Livraria.Livro.Service.Update(livro);
+            Livraria.Livro.Update.Service.Call(livro);
 
-            Assert.IsTrue(Livraria.Livro.Service.Read(f => f.Where(Livraria.Livro.Expression.ISBNHas(livro)).Where(w => w.Preco == 20.00M)).Any(), "Update");
+            Assert.IsTrue(Livraria.Livro.Read.Service.Call(f => f.Where(Livraria.Livro.Expression.ISBNHas(livro)).Where(w => w.Preco == 20.00M)).Any(), "Update");
 
-            Livraria.Livro.Service.Delete(livro);
+            Livraria.Livro.Delete.Service.Call(livro);
 
-            Assert.IsFalse(Livraria.Livro.Service.Read(f => f.Where(Livraria.Livro.Expression.ISBNHas(livro))).Any(), "Delete");
+            Assert.IsFalse(Livraria.Livro.Read.Service.Call(f => f.Where(Livraria.Livro.Expression.ISBNHas(livro))).Any(), "Delete");
         }
 
         [TestMethod]
@@ -48,13 +47,13 @@ namespace Livraria.Test.Livro
                 PublicacaoData = new System.DateTime(1882, 01, 01)
             };
 
-            Assert.ThrowsExceptionAsync<Exception.Model>(() => Livraria.Livro.Service.Update(livro)).Wait();
+            Assert.ThrowsExceptionAsync<Exception.Model>(() => Livraria.Livro.Update.Service.Call(livro)).Wait();
 
             Livraria.WebApi.Controllers.Livro.Post.Service.Call(livro).Wait();
-            Assert.ThrowsExceptionAsync<Exception.Model>(() => Livraria.Livro.Service.Create(livro)).Wait();
+            Assert.ThrowsExceptionAsync<Exception.Model>(() => Livraria.Livro.Create.Service.Call(livro)).Wait();
 
             Livraria.WebApi.Controllers.Livro.Delete.Service.Call(livro).Wait();
-            Assert.ThrowsExceptionAsync<Exception.Model>(() => Livraria.Livro.Service.Delete(livro)).Wait();
+            Assert.ThrowsExceptionAsync<Exception.Model>(() => Livraria.Livro.Delete.Service.Call(livro)).Wait();
         }
 
         [TestMethod]

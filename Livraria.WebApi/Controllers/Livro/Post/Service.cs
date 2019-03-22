@@ -8,7 +8,7 @@
         {
             try
             {
-                await Livraria.Livro.Service.Create(livro);
+                await Livraria.Livro.Create.Service.Call(livro);
                 return new Envelope.Model();
             }
             catch (Exception.Model ex)
