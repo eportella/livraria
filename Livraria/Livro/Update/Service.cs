@@ -5,7 +5,6 @@
 
     public static class Service
     {
-
         public static Task Call(Interface livro)
         {
             using (var db = EntityFramework.DbContext.Service.MemoryNew())

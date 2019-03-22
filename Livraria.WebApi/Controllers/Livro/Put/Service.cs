@@ -10,14 +10,11 @@
             {
                 await Livraria.Livro.Update.Service.Call(livro);
 
-                return new Envelope.Model();
+                return Envelope.Service.Create();
             }
             catch (Exception.Model ex)
             {
-                return new Envelope.Model
-                {
-                    mensagem = ex.Message
-                };
+                return Envelope.Service.Create(exception: ex);
             }
         }
     }
