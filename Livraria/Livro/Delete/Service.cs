@@ -12,7 +12,7 @@
                 var entity = db.Livro.SingleOrDefault(Expression.ISBNHas(livro));
 
                 if (entity == null)
-                    throw new Livraria.Exception.Model($"{nameof(livro.ISBN)} ({livro.ISBN}) não encontrado");
+                    throw new Exception.Model($"{nameof(livro.ISBN)} ({livro.ISBN}) não encontrado");
 
                 db.Livro.Remove(entity);
                 return db.SaveChangesAsync();
