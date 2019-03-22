@@ -7,5 +7,8 @@
     {
         public static Expression<Func<EntityFramework.Livro.Model, bool>> ISBNHas(Interface @interface) =>
             s => s.ISBN == @interface.ISBN;
+
+        public static Expression<Func<EntityFramework.Livro.Model, object>> IncludeAutor =>
+            s => s.Autor;
     }
 }

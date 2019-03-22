@@ -21,17 +21,35 @@ namespace Livraria.Test.Livro
             };
             Livraria.Livro.Create.Service.Call(livro).Wait();
 
-            Assert.IsTrue(Livraria.Livro.Read.Service.Call(f => f.Where(Livraria.Livro.Expression.ISBNHas(livro))).Any(), "Created & Read");
+            Assert.IsTrue(
+                Livraria.Livro.Read.Service.Call(
+                    function: f => f.Where(Livraria.Livro.Expression.ISBNHas(livro)),
+                    include: new[] { Livraria.Livro.Expression.IncludeAutor }
+                )
+                .Any(),
+                "Created & Read");
 
             livro.Preco = 20.00M;
 
             Livraria.Livro.Update.Service.Call(livro);
 
-            Assert.IsTrue(Livraria.Livro.Read.Service.Call(f => f.Where(Livraria.Livro.Expression.ISBNHas(livro)).Where(w => w.Preco == 20.00M)).Any(), "Update");
+            Assert.IsTrue(
+                Livraria.Livro.Read.Service.Call(
+                    function: f => f.Where(Livraria.Livro.Expression.ISBNHas(livro)).Where(w => w.Preco == 20.00M),
+                    include: new[] { Livraria.Livro.Expression.IncludeAutor }
+                )
+                .Any(), 
+                "Update");
 
             Livraria.Livro.Delete.Service.Call(livro);
 
-            Assert.IsFalse(Livraria.Livro.Read.Service.Call(f => f.Where(Livraria.Livro.Expression.ISBNHas(livro))).Any(), "Delete");
+            Assert.IsFalse(
+                Livraria.Livro.Read.Service.Call(
+                    function: f => f.Where(Livraria.Livro.Expression.ISBNHas(livro)),
+                    include: new[] { Livraria.Livro.Expression.IncludeAutor }
+                )
+                .Any(), 
+                "Delete");
         }
 
         [TestMethod]
@@ -177,13 +195,11 @@ namespace Livraria.Test.Livro
                 }
             }).Result.resultado.First().Preco == 29.99M);
 
-            
+
             Task.WaitAll(Livraria.WebApi.Controllers.Livro.Get.Service.Call(null).Result.resultado.Select(item => Livraria.WebApi.Controllers.Livro.Delete.Service.Call(new Livraria.Livro.Model
             {
                 ISBN = item.ISBN
             })).ToArray());
-
-
         }
     }
 }

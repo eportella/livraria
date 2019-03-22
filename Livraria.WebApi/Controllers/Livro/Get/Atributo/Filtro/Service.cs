@@ -12,7 +12,7 @@
                 query = query.Where(o => o.ISBN.Contains(filtro.ISBN.Contem));
 
             if (!string.IsNullOrWhiteSpace(filtro.Autor?.Contem))
-                query = query.Where(o => o.Autor.Contains(filtro.Autor.Contem));
+                query = query.Where(o => o.Autor.Nome.Contains(filtro.Autor.Contem));
 
             if (!string.IsNullOrWhiteSpace(filtro.Nome?.Contem))
                 query = query.Where(o => o.Nome.Contains(filtro.Nome.Contem));

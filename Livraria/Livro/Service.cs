@@ -6,7 +6,7 @@
         {
             return new Model
             {
-                Autor = item.Autor,
+                Autor = item.Autor.Nome,
                 ISBN = item.ISBN,
                 CapaImagemConteudo = item.CapaImagemConteudo,
                 Nome = item.Nome,

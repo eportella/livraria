@@ -9,5 +9,6 @@
 
         }
         public DbSet<Livro.Model> Livro { get; set; }
+        public DbSet<Autor.Model> Autor { get; set; }
     }
 }
