@@ -19,7 +19,7 @@
                     query = function(query);
 
                 foreach (var item in query)
-                    yield return item;
+                    yield return Livro.Service.Create(item);
             }
         }
     }

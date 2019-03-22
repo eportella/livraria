@@ -1,6 +1,6 @@
 ﻿namespace Livraria.EntityFramework.Livro
 {
-    public class Model : Livraria.Livro.Interface
+    public class Model
     {
         internal Model() : base() { }
         public long Id { get; set; }
