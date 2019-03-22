@@ -2,7 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
 
-    internal class Model : DbContext, Interface
+    internal class Model : DbContext
     {
         internal Model(DbContextOptions<Model> options) : base(options)
         {
